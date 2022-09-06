@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+
+.estilos{
+    border: 1px solid blueviolet!important;
+}
+
+.ui-panel-title, .ui-panel-titlebar{
+    border-color: blueviolet!important;
+}
+
+
+.botones {
+    margin: 10px !important;
+  }
+
+   .p-datatable .p-datatable-header {
+    background: #0b213f !important;
+    border: 1px solid #071426 !important;
+   
+  }
+
+
+  .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link {
+
+    background: #0b213f !important;
+    color: #dbe0e6 !important;
+}
+
+
+.p-datatable .p-datatable-thead > tr > th {
+    border: 1px solid #071426 !important;
+    color: #dbe0e6 !important;
+    background: #0b213f !important;
+}
+
+.p-paginator {
+    background: #0b213f !important;
+    color: #fefeff !important;
+    border: solid #071426 !important;
+}
+
+.p-inputtext {
+
+    color: #f8f9fa !important;
+    background: #0b213f  !important;
+    border: 1px solid #ced4da !important;
+
+}
+
+/* 
+#0b213f;
+
+#071426; */
