@@ -7,18 +7,18 @@ import { ConfirmationService, MenuItem } from 'primeng/api';
 })
 export class NavbarService {
 
-  public items !: MenuItem[];
+  public itemsNavbar !: MenuItem[];
   public listaItems = ['/integracion-error', '/comparacion'];
   public route = "";
 
   constructor(
     private router: Router
-  ) { 
+  ) {
     this.valoresNavbar();
   }
 
   valoresNavbar(){
-    this.items = [
+    this.itemsNavbar = [
       {
         label: 'Home', 
         icon: 'pi pi-fw pi-home',
@@ -26,7 +26,7 @@ export class NavbarService {
       },
       {
         label: 'Comparacion', 
-        icon: 'pi pi-fw pi-file',
+        icon: 'pi pi-fw pi-check-square',
         routerLink: 'comparacion'
       }
       // ,

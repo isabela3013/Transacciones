@@ -22,6 +22,7 @@ import { IntegracionErrorComponent } from './componentes/integracion-error/integ
 import { HeaderComponent } from './componentes/estilo/header/header.component';
 import { FooterComponent } from './componentes/estilo/footer/footer.component';
 import { ComparacionComponent } from './componentes/comparacion/comparacion.component';
+import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ComparacionComponent } from './componentes/comparacion/comparacion.comp
     MultiSelectModule,
     OverlayPanelModule,
     DynamicDialogModule,
-    ToastModule
+    ToastModule,
+    MenubarModule
 
   ],
   providers: [],

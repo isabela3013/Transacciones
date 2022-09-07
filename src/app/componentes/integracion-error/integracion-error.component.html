@@ -1,6 +1,3 @@
-<p-menubar [model]="items"></p-menubar>
-
-
 <!-- ================= Botón flotante en la esquima superior derecha de recargar ================= -->
 <!-- <button type="button" pButton pRipple (click)="showError()" label="Error" class="p-button-danger mb-2"></button> -->
 <div align="right" class="flex align-items-center justify-content-between">
@@ -117,7 +114,7 @@
 
 <!-- Detalle vista por bodegas -->
 <p-dialog header="Detalle minimo" [(visible)]="displayBasic2" [style]="{width: '70vw', height: '75%'}" [baseZIndex]="10000" [draggable]="false">
-    <p-table [value]="countid" responsiveLayout="scroll" responsiveLayout="stack" [paginator]="true" [rows]="5">
+    <p-table [value]="countid" responsiveLayout="scroll" responsiveLayout="stack" [paginator]="true" [rows]="5" [style]="{height: '95%'}">
         <ng-template pTemplate="header">
             <tr>
                 <th *ngFor="let col of colsCid">{{col.header}}</th>

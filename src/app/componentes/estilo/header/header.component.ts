@@ -16,23 +16,11 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.items = [
-      {
-        label: 'Home', 
-        icon: 'pi pi-fw pi-home',
-        routerLink: 'integracion-error'
-      },
-      {
-        label: 'Comparacion', 
-        icon: 'pi pi-fw pi-file',
-        routerLink: 'comparacion'
-      }
-      
-    ];
+    this.refreshNavbars();
   }
 
   public refreshNavbars(){
-    this.items = this.navbarService.items
+    this.items = this.navbarService.itemsNavbar;
   }
 
 }
