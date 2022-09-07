@@ -1,0 +1,11 @@
+<!-- <p-tabMenu [model]="items" responsiveLayout="stack"></p-tabMenu><br> -->
+
+<div style="width: 100%; margin: auto;" class="navbarSticky">
+    <p>Header</p>
+    <p-menubar [model]="navbarService.items" id="navBarDefault">
+        <ng-template pTemplate="end">
+            <button pButton label="Salir" icon="pi pi-power-off" iconPos="right" class="p-button-warning botonRojo btnSalir"
+                placement="bottom" ngbTooltip="Salir de la Aplicacion"></button>
+        </ng-template>
+    </p-menubar>
+</div>

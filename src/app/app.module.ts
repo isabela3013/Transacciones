@@ -18,11 +18,19 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PipesPipe } from './Pipes/pipes.pipe';
+import { IntegracionErrorComponent } from './componentes/integracion-error/integracion-error.component';
+import { HeaderComponent } from './componentes/estilo/header/header.component';
+import { FooterComponent } from './componentes/estilo/footer/footer.component';
+import { ComparacionComponent } from './componentes/comparacion/comparacion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PipesPipe
+    PipesPipe,
+    IntegracionErrorComponent,
+    HeaderComponent,
+    FooterComponent,
+    ComparacionComponent
   ],
   imports: [
     BrowserModule,

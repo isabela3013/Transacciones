@@ -1,0 +1,132 @@
+<!-- ================= Botón flotante en la esquima superior derecha de recargar ================= -->
+<!-- <button type="button" pButton pRipple (click)="showError()" label="Error" class="p-button-danger mb-2"></button> -->
+<div align="right" class="flex align-items-center justify-content-between">
+    <button   type="button" pButton pRipple icon="pi pi-refresh"  (click)="ngOnInit();cptura();countTrans(productC,0)"  class="p-button-info mr-2 botones"  pTooltip="Refresh" tooltipPosition="bottom"></button>
+</div>
+<!-- <p-multiSelect (click)="cptura()"  [(ngModel)]="seleccionados" [options]="List"  defaultLabel="Selecciones el pv" optionLabel="PuntoV" selectedItemsLabel="{0} List selected"></p-multiSelect> -->
+
+
+<!-- Título -->
+<div class="container">
+    <h1>Consulta de transacciones</h1><br>
+<div class="row">
+
+
+<!-- ================= Lista de bodegas ================= -->
+<div class="col-4 col-md-3">
+    <p-listbox (click)="cptura()"  [options]="List" [(ngModel)]="seleccionados" [metaKeySelection]="false" [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="PuntoV" [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}">
+        <ng-template  let-country pTemplate="item">
+            <div  class="lista-item">
+                <div >{{country.PuntoV}}</div>
+            </div>
+        </ng-template>
+    </p-listbox><br>
+</div>
+
+
+<!-- ================= Vista de errores por bodegas ================= -->
+<div  class="col-md-9">
+    <p-table selectionMode="single"  [value]="count" responsiveLayout="scroll" responsiveLayout="stack" [paginator]="   " [rows]="10">
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let col of colsC">{{col.header}}</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-productC>
+            <tr>
+                <td *ngFor="let col of colsC">{{productC[col.field]}}</td>  
+                <td><button pButton pRipple type="button" label="Detalle" class="p-button-text" (click)="countTrans(productC,1)"></button></td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <br>
+    <br>
+</div>
+
+
+<!-- ================= Vista de errores ================= -->
+<h1>Consulta general de transacciones</h1><br>
+<div class="row">
+
+    <div class="col-6 col-md-12">
+        <div class="card">
+            <p-table selectionMode="single"  styleClass="p-datatable-gridlines p-datatable-sm" [(selection)]="selectedProduct1" [value]="table"   responsiveLayout="stack" [paginator]="true" [rows]="10" >
+                
+                <!-- Botones -->
+                <ng-template pTemplate="caption" >
+                    <div align="right" class="flex align-items-center justify-content-between">
+                        <button   type="button" pButton pRipple icon="pi pi-file-excel"  (click)="exportExcel()"  class="p-button-success mr-2 botones"  pTooltip="XLS" tooltipPosition="bottom"></button>
+                        <button   type="button" pButton pRipple icon="pi pi-refresh"  (click)="ngOnInit()"  class="p-button-info mr-2 botones"  pTooltip="Refresh" tooltipPosition="bottom"></button>
+                    </div>
+                </ng-template>
+
+                <!-- Encabezado -->
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th *ngFor="let col of cols">{{col.header}}</th>
+                        <th></th>
+                    </tr>
+
+                    <tr>
+                        <th *ngFor="let col of cols"><p-columnFilter type="text" field={{col.header}}></p-columnFilter></th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+
+                <!-- Cuerpo -->
+                <ng-template pTemplate="body" let-product >
+                    <tr>
+                        <td *ngFor="let col of cols">{{product[col.field]}}</td>
+                        <td><button pButton pRipple type="button" label="JSON" class="p-button-text" (click)="editProduct(product); json(product)"></button></td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+
+
+<!-- ================= Dialogs ================= -->
+<!-- JSON desde la vista general -->
+<p-dialog [visible]="productDialog" [style]="{width: '600px'}"  header="JSON de envio service layer" [modal]="true"  styleClass="p-fluid" [closable]="false">
+    <ng-template pTemplate="content">
+
+
+        <div class="field">
+            
+             <textarea [autoResize] = "true" rows="35" cols="40" pInputTextarea [(ngModel)]="formato"></textarea>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <br>
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    </ng-template>
+
+</p-dialog>
+
+<!-- Dialogo de confirmación -->
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+<!-- Detalle vista por bodegas -->
+<p-dialog header="Detalle minimo" [(visible)]="displayBasic2" [style]="{width: '70vw'}" [baseZIndex]="10000">
+    <p-table [value]="countid" responsiveLayout="scroll" responsiveLayout="stack" [paginator]="true" [rows]="5">
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let col of colsCid">{{col.header}}</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-productid>
+            <tr>
+                <td *ngFor="let col of colsCid">{{productid[col.field]}}</td>
+                <td><p-button icon="pi pi-upload" styleClass="p-button-sm"></p-button></td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="displayBasic2=false" label="Yes" class="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
