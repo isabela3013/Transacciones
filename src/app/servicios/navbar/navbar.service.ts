@@ -8,6 +8,7 @@ import { ConfirmationService, MenuItem } from 'primeng/api';
 export class NavbarService {
 
   public items !: MenuItem[];
+  public listaItems = ['/integracion-error', '/comparacion'];
   public route = "";
 
   constructor(

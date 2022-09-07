@@ -9,16 +9,26 @@ import { NavbarService } from 'src/app/servicios/navbar/navbar.service';
 })
 export class HeaderComponent implements OnInit {
 
-  public items !: MenuItem[];
+  items : MenuItem[];
 
   constructor(
     public navbarService:NavbarService
   ) { }
 
   ngOnInit() {
-    console.log(this.navbarService.items)
-    this.refreshNavbars();
-    console.log(this.navbarService.items)
+    this.items = [
+      {
+        label: 'Home', 
+        icon: 'pi pi-fw pi-home',
+        routerLink: 'integracion-error'
+      },
+      {
+        label: 'Comparacion', 
+        icon: 'pi pi-fw pi-file',
+        routerLink: 'comparacion'
+      }
+      
+    ];
   }
 
   public refreshNavbars(){

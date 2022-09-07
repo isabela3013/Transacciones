@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Count } from 'src/app/Modelos/Count.interface';
 import { Puntos } from 'src/app/Modelos/Puntos.interface';
@@ -29,7 +29,7 @@ export class IntegracionErrorComponent implements OnInit {
   cols : any[];
   colsC : any[];
   colsCid : any[];
-  //items : MenuItem[];
+  items : MenuItem[];
   seleccionados : Puntos[];
   ref : DynamicDialogRef;
   bodega : string;
@@ -57,13 +57,15 @@ export class IntegracionErrorComponent implements OnInit {
         { field: 'Bodega', header: 'Bodega' }
       ];
 
-      // this.items = [
-      //   {label: 'Home', icon: 'pi pi-fw pi-home', routerLink: ['/integracion-error']},
-      //   {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
-      //   {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
-      //   {label: 'Documentation', icon: 'pi pi-fw pi-file'},
-      //   {label: 'Settings', icon: 'pi pi-fw pi-cog'}
-      // ];
+      this.items = [
+        {label: 'Home', icon: 'pi pi-fw pi-home', routerLink: ['/integracion-error']},
+        {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
+        {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
+        {label: 'Documentation', icon: 'pi pi-fw pi-file'},
+        {label: 'Settings', icon: 'pi pi-fw pi-cog'}
+      ];
+
+
 
       this.peopleFilter = {Bodega: 'PV-LCAS', Registro: '163169'};
 
