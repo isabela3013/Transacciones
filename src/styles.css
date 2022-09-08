@@ -44,7 +44,14 @@
     color: #f8f9fa !important;
     background: #0b213f  !important;
     border: 1px solid #ced4da !important;
+}
 
+.true-icon {
+    color: #22c55e !important;
+}
+
+.false-icon {
+    color: red !important;
 }
 
 /* 

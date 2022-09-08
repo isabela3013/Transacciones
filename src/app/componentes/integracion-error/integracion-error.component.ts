@@ -38,14 +38,19 @@ export class IntegracionErrorComponent implements OnInit {
   idc : number;
   peopleFilter : any;
 
+  ListaTransacciones: Trans[];
+
   constructor(
     private api: ServicioService,
     private messageService: MessageService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.api.getAllTrans().subscribe(data =>{
-      this.table =  data
+      this.table =  data.filter(it => it.Error == true)
+      console.log(this.table)
+
+      console.log(data)
  
       this.cols = [
         { field: 'Registro', header: 'Registro' },
@@ -100,7 +105,8 @@ export class IntegracionErrorComponent implements OnInit {
     }
   
     this.api.getAllCountid(this.bodega,this.id).subscribe(dataid =>{
-      this.countid =  dataid;
+      console.log(dataid)
+      this.countid =  dataid.filter(it => it.Error == true);
       this.colsCid = [
         { field: 'Registro', header: 'Registro'},
         { field: 'Observaciones', header: 'Observaciones' },
@@ -129,8 +135,10 @@ export class IntegracionErrorComponent implements OnInit {
       return element.PuntoV;
     });
 
-    this.api.getAllCount(bode.toString()).subscribe(countt =>{
-      this.count =  countt;
+    this.api.getAllCount(bode.toString(),true).subscribe(countt =>{
+      console.log(countt)
+      this.count = countt;
+      console.log(this.count)
 
       this.colsC = [
         { field: 'NombreIntegracion', header: 'Integración' },
@@ -143,5 +151,4 @@ export class IntegracionErrorComponent implements OnInit {
   showError() {
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Message Content'});
   }
-
 }

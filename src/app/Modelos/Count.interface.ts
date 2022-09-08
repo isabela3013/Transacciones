@@ -6,4 +6,5 @@ export interface Count {
     Registro:string;
     Observaciones:string;
     IdIntegracionID:number;
+    Error:boolean;
 }

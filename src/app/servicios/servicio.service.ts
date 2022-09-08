@@ -5,6 +5,7 @@ import { Count } from '../Modelos/Count.interface';
 import { Puntos } from '../Modelos/Puntos.interface';
 import { Trans } from '../Modelos/Transacciones.interface';
 import { HubConnectionBuilder,HubConnection } from '@aspnet/signalr';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,26 +19,26 @@ export class ServicioService {
     // this.hubConnection.start();
   }
 
-  TransUrl = 'https://localhost:44376/api/';
+  URL = environment.linkApp
 
   getAllTrans():Observable<Trans[]>{
-    let tra  = this.TransUrl+'Trans';
+    let tra  = this.URL+'Trans';
     return this.http.get<Trans[]>(tra);
   }
 
 
   getAllPvs():Observable<Puntos[]>{
-    let pv  = this.TransUrl+'Puntov/Puntos';
+    let pv  = this.URL+'Puntov/Puntos';
     return this.http.get<Puntos[]>(pv);
   }
 
-  getAllCount(dato: string):Observable<Count[]>{
-    let cou  = this.TransUrl+'Trans/Count?bod='+dato;
+  getAllCount(dato: string,error:boolean):Observable<Count[]>{
+    let cou  = this.URL+'Trans/Count?bod='+dato+'&error='+error;
     return this.http.get<Count[]>(cou);
   }
 
   getAllCountid(dato: string,id:number):Observable<Count[]>{
-    let cou  = this.TransUrl+'Trans/CountId?bod='+dato+'&id='+id;
+    let cou  = this.URL+'Trans/CountId?bod='+dato+'&id='+id;
     return this.http.get<Count[]>(cou);
   }
 
