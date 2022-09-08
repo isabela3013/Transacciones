@@ -1,1 +1,59 @@
+<h1>Consulta general de transacciones</h1><br>
+    <!-- <div class="row"> -->
 
+<div class="col-3 col-md-12" style="width: 100%;">
+    <div class="card" style="width: 100%">
+        <p-table selectionMode="single" styleClass="p-datatable-gridlines p-datatable-sm" [(selection)]="selectedProduct1" [value]="table" responsiveLayout="stack" [paginator]="true" [rows]="12" >
+            
+            <!-- Botones -->
+            <ng-template pTemplate="caption" >
+                <div align="right" class="flex align-items-center justify-content-between">
+                    <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2 botones" pTooltip="XLS" tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-refresh" (click)="ngOnInit()" class="p-button-info mr-2 botones" pTooltip="Refresh" tooltipPosition="bottom"></button>
+                </div>
+            </ng-template>
+
+            <!-- Encabezado -->
+            <ng-template pTemplate="header">
+                <!-- Títulos -->
+                <tr>
+                    <th *ngFor="let col of cols" class="text-center">{{col.header}}<p-columnFilter type="text" field={{col.header}} display="menu"></p-columnFilter></th>
+                    <th class="text-center">Verificado</th>
+                    <th class="text-center"></th>
+                </tr>
+
+                <!-- Filitro -->
+                <!-- <tr>
+                    <th *ngFor="let col of cols"><p-columnFilter type="text" field={{col.header}} display="menu"></p-columnFilter></th>
+                    <th></th>
+                </tr> -->
+            </ng-template>
+
+            <!-- Cuerpo -->
+            <ng-template pTemplate="body" let-product >
+                <tr>
+                    <td *ngFor="let col of cols" class="text-center">{{product[col.field]}}</td>
+                    <td class="text-center"><i class="pi" [ngClass]="{'true-icon pi-check-circle': !product.Error, 'false-icon pi-times-circle': product.Error}"></i></td>
+                    <td class="text-center"><button pButton pRipple type="button" label="JSON" class="p-button-text" (click)="editProduct(product); json(product)"></button></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <!-- </div> -->
+</div>
+
+
+<!--DIALOGS-->
+<!-- Comparación del JSON -->
+<p-dialog [visible]="productDialog" [style]="{width: '600px', height: '75%'}"  header="JSON de envio service layer" [modal]="true"  styleClass="p-fluid" [closable]="false" [draggable]="false">
+    <ng-template pTemplate="content">
+        <div class="field">
+            {{objetoIntegracion.DocDate}}
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <br>
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    </ng-template>
+</p-dialog>

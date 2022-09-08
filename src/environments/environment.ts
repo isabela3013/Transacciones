@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  linkApp : 'https://localhost:44376/api/',
+  linkSAP : 'https://192.168.1.9:50000/b1s/v1/'
 };
 
 /*
