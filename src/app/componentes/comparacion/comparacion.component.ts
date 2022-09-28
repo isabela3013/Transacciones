@@ -4,6 +4,12 @@ import * as FileSaver from 'file-saver';
 import { Trans } from 'src/app/Modelos/Transacciones.interface';
 import { ObjetoIntegracion } from 'src/app/Modelos/objeto-integracion.model';
 import { ObjetoResultado } from 'src/app/Modelos/objeto-resultado.model';
+import { ObjetoTraslados } from 'src/app/Modelos/objeto-traslados.model';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
+import { ObjetoDetalle } from 'src/app/Modelos/objeto-detalle.model';
+import { ObjetoTraslador } from 'src/app/Modelos/objeto-traslador.model';
+
+// import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-comparacion',
@@ -13,20 +19,37 @@ import { ObjetoResultado } from 'src/app/Modelos/objeto-resultado.model';
 export class ComparacionComponent implements OnInit {
 
   table : Trans[];
+  tableAux : Trans[];
   cols : any[];
   peopleFilter : any;
   selectedProduct1 : Trans;
   productDialog: boolean = false;
   product : Trans;
   objetoIntegracion : ObjetoIntegracion;
+  listaObjetoIntegracion : ObjetoIntegracion[];
   objetoResultado : ObjetoResultado;
+  listaObjetoResultado : ObjetoResultado[];
   comparacion : boolean = false;
+  itemCodeR : string[] = [];
+  quantityR : string[] = [];
+  warehouseCodeR : string[] = [];
+  objetoTraslados : ObjetoTraslados;
+  listaObjetoTraslados : ObjetoTraslados[];
+  itemCodeT : string[] = [];
+  quantityT : string[] = [];
+  warehouseCodeT : string[] = [];
+  listaDetalle : ObjetoDetalle[] = [];
+  objetoTraslador : ObjetoTraslador;
+  listaObjetoTraslador : ObjetoTraslador[];
+  DocNumT : string;
+  U_NumPorciposT : string;
 
   constructor(
     private api: ServicioService,
   ) { }
 
   ngOnInit(): void {
+    
     //Trae todas las transacciones
     this.api.getAllTrans().subscribe(data =>{
       
@@ -40,15 +63,17 @@ export class ComparacionComponent implements OnInit {
         { field: 'Registro', header: 'Registro' },
         { field: 'FechaInsert', header: 'Inserción' },
         { field: 'FechaModificacion', header: 'Modificación' },
-        // { field: 'ObjetoIntegracion', header: 'JSON' },
+        { field: 'ObjetoIntegracion', header: 'JSON' },
         { field: 'NombreIntegracion', header: 'Integración' },
         { field: 'Bodega', header: 'Bodega' },
-        { field: 'ObjetoIntegracion', header: 'JSON' }
+        //{ field: 's', header: 'JSON' },
       ];
 
       this.peopleFilter = {Bodega: 'PV-LCAS', Registro: '163169'};
 
     })
+
+    // this.asignarObjetos();
   }
 
   editProduct(product: Trans) {
@@ -56,24 +81,92 @@ export class ComparacionComponent implements OnInit {
     this.productDialog = true;
   }
 
-  json(product : Trans) {
+  json(product : Trans): void {
     let textoJSON = product;
     console.log(product)
-
+    console.log()
     //Teniendo un objeto...
-    let objeto1 = JSON.parse(textoJSON.ObjetoIntegracion);
-    console.log(objeto1)
-    //Lo convertimos a JSON formateado con 2 espacios
-    this.objetoIntegracion = objeto1;
-    console.log(this.objetoIntegracion)
 
-    let objeto2 = JSON.parse(textoJSON.ObjetoResultado);
-    this.objetoResultado = objeto2;
-    console.log(this.objetoResultado)
 
-    if(this.comparacionJson()){
-      this.comparacion = true;
+    if(textoJSON.IdIntegracion == 4){
+      console.log(textoJSON.ObjetoTraslados)
+
+      let objeto1 = JSON.parse(textoJSON.ObjetoIntegracion);
+      console.log(objeto1)
+  
+      this.objetoTraslados = objeto1;
+      console.log(this.objetoTraslados)
+
+
+      let objeto2 = JSON.parse(textoJSON.ObjetoResultado);
+      console.log(objeto2)
+
+      this.objetoTraslador = objeto2;
+      console.log(this.objetoTraslador)
+      
+      this.DocNumT = (this.objetoTraslador.U_NumPorcipos)
+      
+      this.U_NumPorciposT = (this.objetoTraslados.DocNum)
+
+      this.objetoTraslados.StockTransferLines.forEach(StockTransferLines => {
+
+        this.itemCodeT.push(StockTransferLines.ItemCode)
+        this.quantityT.push(StockTransferLines.Quantity)
+        this.warehouseCodeT.push(StockTransferLines.WarehouseCode)
+      });
+
+      this.objetoTraslador.StockTransferLines.forEach(DocumentLine => {
+  
+        this.itemCodeR.push(DocumentLine.ItemCode)
+        this.quantityR.push(DocumentLine.Quantity)
+        this.warehouseCodeR.push(DocumentLine.WarehouseCode)
+    
+      });
+
     }
+
+    if(textoJSON.IdIntegracion == 2){
+
+      let objeto1 = JSON.parse(textoJSON.ObjetoIntegracion);
+      console.log(objeto1)
+      //Lo convertimos a JSON formateado con 2 espacios
+      this.objetoIntegracion = objeto1;
+      console.log(this.objetoIntegracion)
+  
+      let objeto2 = JSON.parse(textoJSON.ObjetoResultado);
+      console.log(objeto2)
+  
+      this.objetoResultado = objeto2;
+      console.log(this.objetoResultado)
+
+      this.DocNumT = (this.objetoIntegracion.DocNum)
+      
+      this.U_NumPorciposT = (this.objetoResultado.U_NumPorcipos)
+
+      this.objetoIntegracion.DocumentLines.forEach(DocumentLine => {
+
+        this.itemCodeT.push(DocumentLine.ItemCode)
+        this.quantityT.push(DocumentLine.Quantity)
+        this.warehouseCodeT.push(DocumentLine.WarehouseCode)
+    
+      });
+  
+  
+      
+      this.objetoResultado.DocumentLines.forEach(DocumentLine => {
+  
+        this.itemCodeR.push(DocumentLine.ItemCode)
+        this.quantityR.push(DocumentLine.Quantity)
+        this.warehouseCodeR.push(DocumentLine.WarehouseCode)
+    
+      });
+      
+    }
+
+    // if(this.comparacionJson()){
+    //   this.comparacion = true;
+    // }
+    //this.listaObjetoIntegracion = this.objetoIntegracion;
   }
 
   comparacionJson() {
@@ -86,7 +179,12 @@ export class ComparacionComponent implements OnInit {
 
   hideDialog() {
     this.productDialog = false;
-    //this.submitted = false;
+    this.itemCodeR= [];
+    this.quantityR = [];
+    this.warehouseCodeR = [];
+    this.itemCodeT = [] ;
+    this.quantityT = [];
+    this.warehouseCodeT = [];
   }
 
   //#region Excel
@@ -110,9 +208,5 @@ export class ComparacionComponent implements OnInit {
   }
 
   //#endregion Excel
-
-  
-
-  
 
 }

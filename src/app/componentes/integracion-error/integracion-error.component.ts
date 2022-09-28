@@ -119,7 +119,7 @@ export class IntegracionErrorComponent implements OnInit {
     this.submitted = false;
   }
 
-  json(product : Trans) {
+  json(product : Trans) {console.log(product)
     let textoJSON = product,
     objeto;
 

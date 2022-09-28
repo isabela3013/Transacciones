@@ -1,17 +1,18 @@
 let date = new Date;
-export class ObjetoIntegracion {
+export class ObjetoTraslados {
     DocEntry:string = '';
     DocNum:string = '';
     DocDate:Date = date;
     Series:string = '';
     U_NumPorcipos:string = '';
-    DocumentLines:[{
+    StockTransferLines:[{
         ItemCode:string,
         Quantity:string,
         WarehouseCode:string
     }]
-    
+    ItemCode:string = '';
     Quantity:string = '';
     WarehouseCode:string = '';
     Price?:string = '';
 }
+

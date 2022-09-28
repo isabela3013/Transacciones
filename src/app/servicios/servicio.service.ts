@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 
 export class ServicioService {
+  listaTransacciones: Trans[];
   // public hubConnection :HubConnection;
   constructor(private http : HttpClient) { 
     // let builder  = new  HubConnectionBuilder;
@@ -40,6 +41,15 @@ export class ServicioService {
   getAllCountid(dato: string,id:number):Observable<Count[]>{
     let cou  = this.URL+'Trans/CountId?bod='+dato+'&id='+id;
     return this.http.get<Count[]>(cou);
+  }
+
+  getListaTransacciones(){
+    return this.http.get(this.URL+'Trans').toPromise().then(async res=>{
+      this.listaTransacciones = res as Trans[];
+    },err=>{
+      console.log(err)
+    })
+
   }
 
 }

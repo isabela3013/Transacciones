@@ -42,8 +42,10 @@
 .p-inputtext {
 
     color: #f8f9fa !important;
-    background: #0b213f  !important;
+    background: #4674b4  !important;
     border: 1px solid #ced4da !important;
+
+    /*#0b213f*/
 }
 
 .true-icon {

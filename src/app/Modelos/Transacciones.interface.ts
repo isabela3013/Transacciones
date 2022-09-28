@@ -9,4 +9,8 @@ export interface Trans {
    ObjetoIntegracion : string;
    Error : boolean;
    ObjetoResultado : string;
+   Objetodocumentlines : string;
+   IdIntegracion : number;
+   ObjetoTraslados : string;
+   objetoTraslados : string;
 }
