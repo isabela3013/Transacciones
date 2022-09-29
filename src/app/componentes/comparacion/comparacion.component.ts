@@ -8,6 +8,12 @@ import { ObjetoTraslados } from 'src/app/Modelos/objeto-traslados.model';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { ObjetoDetalle } from 'src/app/Modelos/objeto-detalle.model';
 import { ObjetoTraslador } from 'src/app/Modelos/objeto-traslador.model';
+import { ObjetoFacturar } from 'src/app/Modelos/objeto-facturar.model';
+import { ObjetoFacturai } from 'src/app/Modelos/objeto-facturai.model';
+import { ObjetoComprai } from 'src/app/Modelos/objeto-comprai.model';
+import { ObjetoComprar } from 'src/app/Modelos/objeto-comprar.model';
+import { ObjetoSocioi } from 'src/app/Modelos/objeto-socioi.model';
+import { ObjetoSocior } from 'src/app/Modelos/objeto-socior.model';
 
 // import { ConsoleReporter } from 'jasmine';
 
@@ -24,6 +30,7 @@ export class ComparacionComponent implements OnInit {
   peopleFilter : any;
   selectedProduct1 : Trans;
   productDialog: boolean = false;
+  productDialog2: boolean = false;
   product : Trans;
   objetoIntegracion : ObjetoIntegracion;
   listaObjetoIntegracion : ObjetoIntegracion[];
@@ -41,8 +48,26 @@ export class ComparacionComponent implements OnInit {
   listaDetalle : ObjetoDetalle[] = [];
   objetoTraslador : ObjetoTraslador;
   listaObjetoTraslador : ObjetoTraslador[];
+  objetoFacturar : ObjetoFacturar;
+  listaObjetoFacturar : ObjetoFacturar[];
+  objetoFacturai : ObjetoFacturai;
+  listaObjetoFacturai : ObjetoFacturai[];
+  objetoComprai : ObjetoComprai;
+  listaObjetoComprai : ObjetoComprai[];
+  objetoComprar : ObjetoComprar;
+  listaObjetoComprar : ObjetoComprar[];
   DocNumT : string;
   U_NumPorciposT : string;
+  RefDocEntrT : string[] = [];
+  objetoSocioi : ObjetoSocioi;
+  listaObjetoSocioi : ObjetoSocioi[];
+  objetoSocior : ObjetoSocior;
+  listaObjetoSocior : ObjetoSocior[];
+  CardCodeT : string;
+  CardNameT : string;
+  CardCodeR : string;
+  CardNameR : string;
+
 
   constructor(
     private api: ServicioService,
@@ -63,7 +88,7 @@ export class ComparacionComponent implements OnInit {
         { field: 'Registro', header: 'Registro' },
         { field: 'FechaInsert', header: 'Inserción' },
         { field: 'FechaModificacion', header: 'Modificación' },
-        { field: 'ObjetoIntegracion', header: 'JSON' },
+        // { field: 'ObjetoIntegracion', header: 'JSON' },
         { field: 'NombreIntegracion', header: 'Integración' },
         { field: 'Bodega', header: 'Bodega' },
         //{ field: 's', header: 'JSON' },
@@ -78,7 +103,16 @@ export class ComparacionComponent implements OnInit {
 
   editProduct(product: Trans) {
     this.product = {...product};
-    this.productDialog = true;
+
+    if(product.IdIntegracion == 9)
+    {
+      this.productDialog2 = true;
+    }
+    else
+    {
+      this.productDialog = true;
+    }
+    
   }
 
   json(product : Trans): void {
@@ -104,7 +138,7 @@ export class ComparacionComponent implements OnInit {
       this.objetoTraslador = objeto2;
       console.log(this.objetoTraslador)
       
-      this.DocNumT = (this.objetoTraslador.U_NumPorcipos)
+      this.RefDocEntrT.push(this.objetoTraslador.U_NumPorcipos)
       
       this.U_NumPorciposT = (this.objetoTraslados.DocNum)
 
@@ -150,9 +184,6 @@ export class ComparacionComponent implements OnInit {
         this.warehouseCodeT.push(DocumentLine.WarehouseCode)
     
       });
-  
-  
-      
       this.objetoResultado.DocumentLines.forEach(DocumentLine => {
   
         this.itemCodeR.push(DocumentLine.ItemCode)
@@ -163,6 +194,201 @@ export class ComparacionComponent implements OnInit {
       
     }
 
+    if(textoJSON.IdIntegracion == 3){
+
+      let objeto1 = JSON.parse(textoJSON.ObjetoIntegracion);
+      console.log(objeto1)
+      //Lo convertimos a JSON formateado con 2 espacios
+      this.objetoFacturai = objeto1;
+      console.log(this.objetoFacturai)
+  
+      let objeto2 = JSON.parse(textoJSON.ObjetoResultado);
+      console.log(objeto2)
+  
+      this.objetoFacturar = objeto2;
+      console.log(this.objetoFacturar)
+
+      this.DocNumT = (this.objetoIntegracion.U_NumPorcipos)
+      
+      this.U_NumPorciposT = (this.objetoResultado.DocNum)
+
+      this.objetoIntegracion.DocumentLines.forEach(DocumentLine => {
+
+        this.itemCodeT.push(DocumentLine.ItemCode)
+        this.quantityT.push(DocumentLine.Quantity)
+        this.warehouseCodeT.push(DocumentLine.WarehouseCode)
+    
+      });
+      this.objetoResultado.DocumentLines.forEach(DocumentLine => {
+  
+        this.itemCodeR.push(DocumentLine.ItemCode)
+        this.quantityR.push(DocumentLine.Quantity)
+        this.warehouseCodeR.push(DocumentLine.WarehouseCode)
+    
+      });
+      
+    }
+
+    if(textoJSON.IdIntegracion == 5){
+
+      let objeto1 = JSON.parse(textoJSON.ObjetoIntegracion);
+      console.log(objeto1)
+      //Lo convertimos a JSON formateado con 2 espacios
+      this.objetoIntegracion = objeto1;
+      console.log(this.objetoIntegracion)
+  
+      let objeto2 = JSON.parse(textoJSON.ObjetoResultado);
+      console.log(objeto2)
+  
+      this.objetoResultado = objeto2;
+      console.log(this.objetoResultado)
+
+      this.DocNumT = (this.objetoIntegracion.U_NumPorcipos)
+      
+      this.U_NumPorciposT = (this.objetoResultado.DocNum)
+
+      this.objetoIntegracion.DocumentLines.forEach(DocumentLine => {
+
+        this.itemCodeT.push(DocumentLine.ItemCode)
+        this.quantityT.push(DocumentLine.Quantity)
+        this.warehouseCodeT.push(DocumentLine.WarehouseCode)
+    
+      });
+      this.objetoResultado.DocumentLines.forEach(DocumentLine => {
+  
+        this.itemCodeR.push(DocumentLine.ItemCode)
+        this.quantityR.push(DocumentLine.Quantity)
+        this.warehouseCodeR.push(DocumentLine.WarehouseCode)
+    
+      });
+      
+    }
+
+    if(textoJSON.IdIntegracion == 6){
+
+      let objeto1 = JSON.parse(textoJSON.ObjetoIntegracion);
+      console.log(objeto1)
+      //Lo convertimos a JSON formateado con 2 espacios
+      this.objetoIntegracion = objeto1;
+      console.log(this.objetoIntegracion)
+  
+      let objeto2 = JSON.parse(textoJSON.ObjetoResultado);
+      console.log(objeto2)
+  
+      this.objetoResultado = objeto2;
+      console.log(this.objetoResultado)
+
+      this.DocNumT = (this.objetoIntegracion.U_NumPorcipos)
+      
+      this.U_NumPorciposT = (this.objetoResultado.U_NumPorcipos)
+
+      this.objetoIntegracion.DocumentLines.forEach(DocumentLine => {
+
+        this.itemCodeT.push(DocumentLine.ItemCode)
+        this.quantityT.push(DocumentLine.Quantity)
+        this.warehouseCodeT.push(DocumentLine.WarehouseCode)
+    
+      });
+      this.objetoResultado.DocumentLines.forEach(DocumentLine => {
+  
+        this.itemCodeR.push(DocumentLine.ItemCode)
+        this.quantityR.push(DocumentLine.Quantity)
+        this.warehouseCodeR.push(DocumentLine.WarehouseCode)
+    
+      });
+      
+    }
+
+    if(textoJSON.IdIntegracion == 8){
+
+      let objeto1 = JSON.parse(textoJSON.ObjetoIntegracion);
+      console.log(objeto1)
+      //Lo convertimos a JSON formateado con 2 espacios
+      this.objetoComprai = objeto1;
+      console.log(this.objetoComprai)
+  
+      let objeto2 = JSON.parse(textoJSON.ObjetoResultado);
+      console.log(objeto2)
+  
+      this.objetoComprar = objeto2;
+      console.log(this.objetoComprar)
+
+      this.U_NumPorciposT = (this.objetoComprar.DocEntry)
+
+      this.objetoComprai.DocumentReferences.forEach(DocumentReferences => {
+
+        this.RefDocEntrT.push(DocumentReferences.RefDocEntr)
+      });
+      console.log(this.RefDocEntrT)
+      this.DocNumT = this.RefDocEntrT[0];
+
+      this.objetoComprai.DocumentLines.forEach(DocumentLine => {
+        this.itemCodeT.push(DocumentLine.ItemCode)
+        this.quantityT.push(DocumentLine.Quantity)
+        this.warehouseCodeT.push(DocumentLine.WarehouseCode)
+      });
+      this.objetoComprar.DocumentLines.forEach(DocumentLine => {
+  
+        this.itemCodeR.push(DocumentLine.ItemCode)
+        this.quantityR.push(DocumentLine.Quantity)
+        this.warehouseCodeR.push(DocumentLine.WarehouseCode)
+    
+      });
+      
+    }
+
+    if(textoJSON.IdIntegracion == 7){
+
+      let objeto1 = JSON.parse(textoJSON.ObjetoIntegracion);
+      console.log(objeto1)
+      //Lo convertimos a JSON formateado con 2 espacios
+      this.objetoComprai = objeto1;
+      console.log(this.objetoComprai)
+  
+      let objeto2 = JSON.parse(textoJSON.ObjetoResultado);
+      console.log(objeto2)
+  
+      this.objetoComprar = objeto2;
+      console.log(this.objetoComprar)
+
+      this.U_NumPorciposT = (this.objetoComprar.U_NumPorcipos)
+      this.DocNumT = (this.objetoComprai.U_NumPorcipos)
+      
+      this.objetoComprai.DocumentLines.forEach(DocumentLine => {
+        this.itemCodeT.push(DocumentLine.ItemCode)
+        this.quantityT.push(DocumentLine.Quantity)
+        this.warehouseCodeT.push(DocumentLine.WarehouseCode)
+      });
+
+      this.objetoComprar.DocumentLines.forEach(DocumentLine => {
+        this.itemCodeR.push(DocumentLine.ItemCode)
+        this.quantityR.push(DocumentLine.Quantity)
+        this.warehouseCodeR.push(DocumentLine.WarehouseCode)
+    
+      });
+      
+    }
+    
+    if(textoJSON.IdIntegracion == 9){
+
+      let objeto1 = JSON.parse(textoJSON.ObjetoIntegracion);
+      console.log(objeto1)
+      //Lo convertimos a JSON formateado con 2 espacios
+      this.objetoSocioi = objeto1;
+      console.log(this.objetoSocioi)
+  
+      let objeto2 = JSON.parse(textoJSON.ObjetoResultado);
+      console.log(objeto2)
+  
+      this.objetoSocior = objeto2;
+      console.log(this.objetoSocior)
+
+      this.CardNameT = (this.objetoSocioi.CardName)
+      this.CardCodeT = (this.objetoSocioi.CardCode)
+      this.CardNameR = (this.objetoSocior.CardName)
+      this.CardCodeR = (this.objetoSocior.CardCode)
+      
+    }
     // if(this.comparacionJson()){
     //   this.comparacion = true;
     // }
@@ -185,6 +411,16 @@ export class ComparacionComponent implements OnInit {
     this.itemCodeT = [] ;
     this.quantityT = [];
     this.warehouseCodeT = [];
+    this.DocNumT = ""
+    this.U_NumPorciposT = ""
+  }
+
+  hideDialog2() {
+    this.productDialog2 = false;
+    this.CardCodeR = ""
+    this.CardCodeT = ""
+    this.CardNameT = ""
+    this.CardNameR= ""
   }
 
   //#region Excel

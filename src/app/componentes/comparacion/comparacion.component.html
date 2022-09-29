@@ -45,7 +45,80 @@
 
 <!--DIALOGS-->
 <!-- Comparación del JSON -->
-<p-dialog [visible]="productDialog" [style]="{width: '600px', height: '75%'}"  header="JSON de envio service layer" [modal]="true"  styleClass="p-fluid" [closable]="true" [draggable]="false">
+<!-- Entradas, Salidas, Traslados, Facturacion Crédito, Notas crédito -->
+<p-dialog [visible]="productDialog" [style]="{width: '600px', height: '75%'}"  header="JSON de envio service layer" [modal]="true"  styleClass="p-fluid" [closable]="false" [draggable]="false">
+    
+    <ng-template pTemplate="content">
+        <div class="field">
+
+            <!-- {{objetoIntegracion.DocDate}} -->
+
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-3 col-xs-12 p-field p-grid" style="margin-top: 10px;">
+                <label for="pruebas">DocNum Porcisoft</label>
+                <p type="text" class="modal-comite" pInputText id="pruebas" required autofocus>
+        
+                    {{DocNumT}}
+        
+                </p>
+            </div>
+    
+            <div class="col-md-6 col-sm-3 col-xs-12 p-field p-grid" style="margin-top: 10px;">
+                <label for="pruebas">Docnum SAP</label>
+                <p type="text" class="modal-comite" pInputText id="pruebas" required autofocus>
+        
+                    {{U_NumPorciposT}}
+        
+                </p>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 p-field p-grid" style="margin-top: 10px;">
+                <label for="pruebas">Articulo Porcisoft</label>
+                <p type="text" class="modal-comite" pInputText id="pruebas" required autofocus>
+        
+                    {{itemCodeT}}
+        
+                </p>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 p-field p-grid" style="margin-top: 10px;">
+                <label for="pruebas">Articulo SAP</label>
+                <p type="text" class="modal-comite" pInputText id="pruebas" required autofocus>
+        
+                    {{itemCodeR}}
+        
+                </p>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 p-field p-grid" style="margin-top: 10px;">
+                <label for="pruebas">Cantidad Porcisoft</label>
+                <p type="number" class="modal-comite" pInputText id="pruebas" required autofocus>
+        
+                    {{quantityT}}
+        
+                </p>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 p-field p-grid" style="margin-top: 10px;">
+                <label for="pruebas">Cantidad SAP</label>
+                <p type="number" class="modal-comite" pInputText id="pruebas" required autofocus>
+        
+                    {{quantityR}}
+        
+                </p>
+            </div>
+        </div>
+        
+    </ng-template>
+        <ng-template pTemplate="footer">
+        <br>
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    </ng-template>
+    
+</p-dialog>
+
+<p-dialog [visible]="productDialog2" [style]="{width: '600px', height: '75%'}"  header="JSON de envio service layer" [modal]="true"  styleClass="p-fluid" [closable]="false" [draggable]="false">
     
     <ng-template pTemplate="content">
 
@@ -56,88 +129,53 @@
         </div>
 
         <div class="row">
-
             <div class="col-md-6 col-sm-3 col-xs-12 p-field p-grid" style="margin-top: 10px;">
-        
-                <label for="pruebas">DocNum Porcisoft</label>
-        
+                <label for="pruebas">Carcode Porcisoft</label>
                 <p type="text" class="modal-comite" pInputText id="pruebas" required autofocus>
         
-                    {{DocNumT}}
-        
+                    {{CardCodeT}}
+
                 </p>
-        
             </div>
         
             <div class="col-md-6 col-sm-3 col-xs-12 p-field p-grid" style="margin-top: 10px;">
-        
-                <label for="pruebas">Docnum SAP</label>
-        
+                <label for="pruebas">Carcode SAP</label>
                 <p type="text" class="modal-comite" pInputText id="pruebas" required autofocus>
         
-                    {{U_NumPorciposT}}
+                    {{CardCodeR}}
         
                 </p>
-    
             </div>
+        </div>
 
-            <div class="col-md-6 col-sm-6 col-xs-12 p-field p-grid" style="margin-top: 10px;">
-        
-                <label for="pruebas">Articulo Porcisoft</label>
-        
+        <div class="row">
+            <div class="col-md-6 col-sm-3 col-xs-12 p-field p-grid" style="margin-top: 10px;">
+                <label for="pruebas">Cardname Porcisoft</label>
                 <p type="text" class="modal-comite" pInputText id="pruebas" required autofocus>
         
-                    {{itemCodeT}}
-        
+                    {{CardNameT}}
+
                 </p>
-
             </div>
-
-            <div class="col-md-6 col-sm-6 col-xs-12 p-field p-grid" style="margin-top: 10px;">
         
-                <label for="pruebas">Articulo SAP</label>
-        
+            <div class="col-md-6 col-sm-3 col-xs-12 p-field p-grid" style="margin-top: 10px;">
+                <label for="pruebas">Cardname SAP</label>
                 <p type="text" class="modal-comite" pInputText id="pruebas" required autofocus>
         
-                    {{itemCodeR}}
+                    {{CardNameR}}
         
                 </p>
-
             </div>
-
-            <div class="col-md-6 col-sm-6 col-xs-12 p-field p-grid" style="margin-top: 10px;">
-        
-                <label for="pruebas">Cantidad Porcisoft</label>
-        
-                <p type="text" class="modal-comite" pInputText id="pruebas" required autofocus>
-        
-                    {{quantityT}}
-        
-                </p>
-
-            </div>
-
-            <div class="col-md-6 col-sm-6 col-xs-12 p-field p-grid" style="margin-top: 10px;">
-        
-                <label for="pruebas">Cantidad SAP</label>
-        
-                <p type="text" class="modal-comite" pInputText id="pruebas" required autofocus>
-        
-                    {{quantityR}}
-        
-                </p>
-
-            </div>
-
         </div>
         
     </ng-template>
         <ng-template pTemplate="footer">
         <br>
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog2()"></button>
     </ng-template>
     
 </p-dialog>
+
 
 
 <p-toast></p-toast>

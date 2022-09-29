@@ -1,5 +1,5 @@
 let date = new Date;
-export class ObjetoIntegracion {
+export class ObjetoFacturai {
     DocEntry:string = '';
     DocNum:string = '';
     DocDate:Date = date;
@@ -8,8 +8,9 @@ export class ObjetoIntegracion {
     DocumentLines:[{
         ItemCode:string,
         Quantity:string,
-        WarehouseCode:string,
+        WarehouseCode:string
     }]
+    
     Quantity:string = '';
     WarehouseCode:string = '';
     Price?:string = '';

@@ -14,4 +14,5 @@ export class ObjetoResultado {
     Quantity:string = '';
     WarehouseCode:string = '';
     Price?:string = '';
+
 }
