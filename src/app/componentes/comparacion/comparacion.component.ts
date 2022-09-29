@@ -138,7 +138,7 @@ export class ComparacionComponent implements OnInit {
       this.objetoTraslador = objeto2;
       console.log(this.objetoTraslador)
       
-      this.RefDocEntrT.push(this.objetoTraslador.U_NumPorcipos)
+      this.DocNumT = (this.objetoTraslador.U_NumPorcipos)
       
       this.U_NumPorciposT = (this.objetoTraslados.DocNum)
 
