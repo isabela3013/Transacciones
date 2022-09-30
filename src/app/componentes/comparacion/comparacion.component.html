@@ -18,7 +18,7 @@
                 <!-- Títulos -->
                 <tr>
                     <th *ngFor="let col of cols" class="text-center">{{col.header}}<p-columnFilter type="text" field={{col.header}} display="menu"></p-columnFilter></th>
-                    <th class="text-center">Verificado</th>
+                    <th class="text-center">Integrado</th>
                     <th class="text-center"></th>
                 </tr>
 
@@ -33,7 +33,7 @@
             <ng-template pTemplate="body" let-product >
                 <tr>
                     <td *ngFor="let col of cols" class="text-center">{{product[col.field]}}</td>
-                    <td class="text-center"><i class="pi" [ngClass]="{'true-icon pi-check-circle': !product.Error, 'false-icon pi-times-circle': product.Error}"></i></td>
+                    <td class="text-center"><i class="pi" [ngClass]="{'true-icon pi-check-circle': product.Integrado, 'false-icon pi-times-circle': !product.Integrado}"></i></td>
                     <td class="text-center"><button pButton pRipple type="button" label="JSON" class="p-button-text" (click)="editProduct(product); json(product)"></button></td>
                 </tr>
             </ng-template>
@@ -57,7 +57,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-3 col-xs-12 p-field p-grid" style="margin-top: 10px;">
                 <label for="pruebas">DocNum Porcisoft</label>
-                <p type="text" class="modal-comite" pInputText id="pruebas" required autofocus>
+                <p type="number" class="modal-comite" pInputText id="pruebas" required autofocus>
         
                     {{DocNumT}}
         
@@ -66,7 +66,7 @@
     
             <div class="col-md-6 col-sm-3 col-xs-12 p-field p-grid" style="margin-top: 10px;">
                 <label for="pruebas">Docnum SAP</label>
-                <p type="text" class="modal-comite" pInputText id="pruebas" required autofocus>
+                <p type="number" class="modal-comite" pInputText id="pruebas" required autofocus>
         
                     {{U_NumPorciposT}}
         

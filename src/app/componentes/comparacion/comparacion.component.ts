@@ -67,6 +67,7 @@ export class ComparacionComponent implements OnInit {
   CardNameT : string;
   CardCodeR : string;
   CardNameR : string;
+  verificado: boolean;
 
 
   constructor(
@@ -77,9 +78,9 @@ export class ComparacionComponent implements OnInit {
     
     //Trae todas las transacciones
     this.api.getAllTrans().subscribe(data =>{
-      
+      //this.comparacionJson(data)
       //Asigna y filtra las transacciones
-      this.table =  data.filter(it => it.Error == false)
+      this.table =  data.filter(it => it.Error == false);
       console.log(this.table)
       console.log(data)
       
@@ -95,8 +96,10 @@ export class ComparacionComponent implements OnInit {
       ];
 
       this.peopleFilter = {Bodega: 'PV-LCAS', Registro: '163169'};
-
+      
+      
     })
+
 
     // this.asignarObjetos();
   }
@@ -199,18 +202,18 @@ export class ComparacionComponent implements OnInit {
       let objeto1 = JSON.parse(textoJSON.ObjetoIntegracion);
       console.log(objeto1)
       //Lo convertimos a JSON formateado con 2 espacios
-      this.objetoFacturai = objeto1;
-      console.log(this.objetoFacturai)
+      this.objetoIntegracion = objeto1;
+      console.log(this.objetoIntegracion)
   
       let objeto2 = JSON.parse(textoJSON.ObjetoResultado);
       console.log(objeto2)
   
-      this.objetoFacturar = objeto2;
-      console.log(this.objetoFacturar)
+      this.objetoResultado = objeto2;
+      console.log(this.objetoResultado)
 
-      this.DocNumT = (this.objetoIntegracion.U_NumPorcipos)
+      this.DocNumT = (this.objetoIntegracion.DocNum)
       
-      this.U_NumPorciposT = (this.objetoResultado.DocNum)
+      this.U_NumPorciposT = (this.objetoResultado.U_NumPorcipos)
 
       this.objetoIntegracion.DocumentLines.forEach(DocumentLine => {
 
@@ -328,7 +331,6 @@ export class ComparacionComponent implements OnInit {
         this.warehouseCodeT.push(DocumentLine.WarehouseCode)
       });
       this.objetoComprar.DocumentLines.forEach(DocumentLine => {
-  
         this.itemCodeR.push(DocumentLine.ItemCode)
         this.quantityR.push(DocumentLine.Quantity)
         this.warehouseCodeR.push(DocumentLine.WarehouseCode)
@@ -393,14 +395,23 @@ export class ComparacionComponent implements OnInit {
     //   this.comparacion = true;
     // }
     //this.listaObjetoIntegracion = this.objetoIntegracion;
-  }
+    if(textoJSON.Error == false)
 
-  comparacionJson() {
-    if(this.objetoIntegracion.DocNum == this.objetoResultado.U_NumPorcipos){
-      return true;
-    } else {
-      return false;
+    {
+    this.verificado == false
     }
+
+  }
+  comparacionJson(data : Trans[]) {
+    data.forEach(product => {
+      this.json(product);
+      if(this.DocNumT == this.U_NumPorciposT){
+        console.log("verdad");
+      } else {
+        console.log("falso");
+      }
+    })
+    
   }
 
   hideDialog() {
