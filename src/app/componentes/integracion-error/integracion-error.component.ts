@@ -15,28 +15,29 @@ import * as FileSaver from 'file-saver';
 })
 export class IntegracionErrorComponent implements OnInit {
 
-  productDialog : boolean;
-  submitted : boolean;
-  table : Trans[];
-  count : Count[];
-  countid : Count[];
-  List : Puntos[];
-  product : Trans;
-  productC : Count;
-  productid : Count;
-  formato : string;
-  selectedProduct1 : Trans;
-  cols : any[];
-  colsC : any[];
-  colsCid : any[];
-  items : MenuItem[];
-  seleccionados : Puntos[];
-  ref : DynamicDialogRef;
-  bodega : string;
-  id : number;
-  displayBasic2 : boolean;
-  idc : number;
-  peopleFilter : any;
+  productDialog: boolean;
+  submitted: boolean;
+  table: Trans[];
+  count: Count[];
+  countid: Count[];
+  List: Puntos[];
+  product: Trans;
+  productC: Count;
+  productid: Count;
+  formato: string;
+  selectedProduct1: Trans;
+  cols: any[];
+  colsC: any[];
+  colsCid: any[];
+  items: MenuItem[];
+  seleccionados: Puntos[];
+  ref: DynamicDialogRef;
+  bodega: string;
+  id: number;
+  displayBasic2: boolean;
+  idc: number;
+  peopleFilter: any;
+  Filtertable:'';
 
   ListaTransacciones: Trans[];
 
@@ -46,12 +47,12 @@ export class IntegracionErrorComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    this.api.getAllTrans().subscribe(data =>{
-      this.table =  data.filter(it => it.Error == true)
+    this.api.getAllTrans().subscribe(data => {
+      this.table = data.filter(it => it.Error == true)
       console.log(this.table)
 
       console.log(data)
- 
+
       this.cols = [
         { field: 'Registro', header: 'Registro' },
         { field: 'FechaInsert', header: 'Inserción' },
@@ -62,21 +63,21 @@ export class IntegracionErrorComponent implements OnInit {
         { field: 'Bodega', header: 'Bodega' }
       ];
 
-      this.peopleFilter = {Bodega: 'PV-LCAS', Registro: '163169'};
+      this.peopleFilter = { Bodega: 'PV-LCAS', Registro: '163169' };
 
     })
 
-    this.api.getAllPvs().subscribe(datapv =>{
-      this.List =  datapv;
+    this.api.getAllPvs().subscribe(datapv => {
+      this.List = datapv;
     })
   }
 
   exportExcel() {
     import("xlsx").then(xlsx => {
-        const worksheet = xlsx.utils.json_to_sheet(this.table);
-        const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-        const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-        this.saveAsExcelFile(excelBuffer, "products");
+      const worksheet = xlsx.utils.json_to_sheet(this.table);
+      const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+      this.saveAsExcelFile(excelBuffer, "products");
     });
   }
 
@@ -84,34 +85,40 @@ export class IntegracionErrorComponent implements OnInit {
     let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     let EXCEL_EXTENSION = '.xlsx';
     const data: Blob = new Blob([buffer], {
-        type: EXCEL_TYPE
+      type: EXCEL_TYPE
     });
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
   }
 
   editProduct(product: Trans) {
-    this.product = {...product};
+    this.product = { ...product };
     this.productDialog = true;
   }
 
-  countTrans(productC: Count, num: number) {
-    this.productC = {...productC};
-    console.log(productC)
+
+
+  /// ACAAAAAAAAA
+
+  async countTrans(productC: Count, num: number) {
+    this.productC = { ...productC };
     this.bodega = productC.Bodega;
     this.id = productC.IdIntegracionID;
-    if(num == 1)
-    {
-      this.displayBasic2 = true;
-    }
-  
-    this.api.getAllCountid(this.bodega,this.id).subscribe(dataid =>{
+
+
+
+    (await this.api.getAllCountid(this.bodega, this.id)).subscribe(dataid => {
+      this.countid = dataid.filter(it => it.Error == true);
       console.log(dataid)
-      this.countid =  dataid.filter(it => it.Error == true);
+      console.log(this.countid)
       this.colsCid = [
-        { field: 'Registro', header: 'Registro'},
+        { field: 'Registro', header: 'Registro' },
         { field: 'Observaciones', header: 'Observaciones' },
       ];
     })
+
+    if (num == 1) {
+      this.displayBasic2 = true;
+    }
   }
 
   hideDialog() {
@@ -119,9 +126,10 @@ export class IntegracionErrorComponent implements OnInit {
     this.submitted = false;
   }
 
-  json(product : Trans) {console.log(product)
+  json(product: Trans) {
+    console.log(product)
     let textoJSON = product,
-    objeto;
+      objeto;
 
     //Teniendo un objeto...
     objeto = JSON.parse(textoJSON.ObjetoIntegracion);
@@ -130,12 +138,12 @@ export class IntegracionErrorComponent implements OnInit {
     this.formato = textoFormateado;
   }
 
-  cptura(){
+  cptura() {
     let bode = this.seleccionados.map(element => {
       return element.PuntoV;
     });
 
-    this.api.getAllCount(bode.toString(),true).subscribe(countt =>{
+    this.api.getAllCount(bode.toString(), true).subscribe(countt => {
       console.log(countt)
       this.count = countt;
       console.log(this.count)
@@ -149,6 +157,6 @@ export class IntegracionErrorComponent implements OnInit {
   }
 
   showError() {
-    this.messageService.add({severity:'error', summary: 'Error', detail: 'Message Content'});
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Message Content' });
   }
 }

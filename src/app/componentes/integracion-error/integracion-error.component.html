@@ -1,7 +1,8 @@
 <!-- ================= Botón flotante en la esquima superior derecha de recargar ================= -->
 <!-- <button type="button" pButton pRipple (click)="showError()" label="Error" class="p-button-danger mb-2"></button> -->
 <div align="right" class="flex align-items-center justify-content-between">
-    <button   type="button" pButton pRipple icon="pi pi-refresh"  (click)="ngOnInit();cptura();countTrans(productC,0)"  class="p-button-info mr-2 botones"  pTooltip="Refresh" tooltipPosition="bottom"></button>
+    <button type="button" pButton pRipple icon="pi pi-refresh" (click)="ngOnInit();cptura();countTrans(productC,0)"
+        class="p-button-info mr-2 botones" pTooltip="Refresh" tooltipPosition="bottom"></button>
 </div>
 <!-- <p-multiSelect (click)="cptura()"  [(ngModel)]="seleccionados" [options]="List"  defaultLabel="Selecciones el pv" optionLabel="PuntoV" selectedItemsLabel="{0} List selected"></p-multiSelect> -->
 
@@ -16,18 +17,21 @@
 
         <!-- ================= Lista de bodegas ================= -->
         <div class="col-4 col-md-3">
-            <p-listbox (click)="cptura()" [options]="List" [(ngModel)]="seleccionados" [metaKeySelection]="false" [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="PuntoV" [listStyle]="{'max-height':'400px'}" [style]="{'width':'15rem'}">
-                <ng-template  let-country pTemplate="item">
-                    <div  class="lista-item">
-                        <div >{{country.PuntoV}}</div>
+            <p-listbox (click)="cptura()" [options]="List" [(ngModel)]="seleccionados" [metaKeySelection]="false"
+                [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="PuntoV"
+                [listStyle]="{'max-height':'400px'}" [style]="{'width':'15rem'}">
+                <ng-template let-country pTemplate="item">
+                    <div class="lista-item">
+                        <div>{{country.PuntoV}}</div>
                     </div>
                 </ng-template>
             </p-listbox><br>
         </div>
 
         <!-- ================= Vista de errores por bodegas ================= -->
-        <div  class="col-md-9">
-            <p-table selectionMode="single" scrollHeight="500px" [scrollable]="true" [value]="count" responsiveLayout="scroll" responsiveLayout="stack" [paginator]="   " [rows]="10">
+        <div class="col-md-9">
+            <p-table selectionMode="single" scrollHeight="500px" [scrollable]="true" [value]="count"
+                responsiveLayout="scroll" responsiveLayout="stack" [paginator]="" [rows]="10">
                 <ng-template pTemplate="header">
                     <tr>
                         <th *ngFor="let col of colsC">{{col.header}}</th>
@@ -36,8 +40,9 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-productC>
                     <tr>
-                        <td *ngFor="let col of colsC">{{productC[col.field]}}</td>  
-                        <td><button pButton pRipple type="button" label="Detalle" class="p-button-text" (click)="countTrans(productC,1)"></button></td>
+                        <td *ngFor="let col of colsC">{{productC[col.field]}}</td>
+                        <td><button pButton pRipple type="button" label="Detalle" class="p-button-text"
+                                (click)="countTrans(productC,1)"></button></td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -50,13 +55,17 @@
 
     <div class="col-3 col-md-12" style="width: 100%;">
         <div class="card" style="width: 100%">
-            <p-table selectionMode="single" styleClass="p-datatable-gridlines p-datatable-sm" [(selection)]="selectedProduct1" [value]="table" responsiveLayout="stack" [paginator]="true" [rows]="12" >
-                
+            <p-table selectionMode="single" styleClass="p-datatable-gridlines p-datatable-sm"
+                [(selection)]="selectedProduct1" [value]="table" responsiveLayout="stack" [paginator]="true"
+                [rows]="12">
+
                 <!-- Botones -->
-                <ng-template pTemplate="caption" >
+                <ng-template pTemplate="caption">
                     <div align="right" class="flex align-items-center justify-content-between">
-                        <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2 botones" pTooltip="XLS" tooltipPosition="bottom"></button>
-                        <button type="button" pButton pRipple icon="pi pi-refresh" (click)="ngOnInit()" class="p-button-info mr-2 botones" pTooltip="Refresh" tooltipPosition="bottom"></button>
+                        <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                            class="p-button-success mr-2 botones" pTooltip="XLS" tooltipPosition="bottom"></button>
+                        <button type="button" pButton pRipple icon="pi pi-refresh" (click)="ngOnInit()"
+                            class="p-button-info mr-2 botones" pTooltip="Refresh" tooltipPosition="bottom"></button>
                     </div>
                 </ng-template>
 
@@ -64,22 +73,26 @@
                 <ng-template pTemplate="header">
                     <!-- Títulos -->
                     <tr>
-                        <th *ngFor="let col of cols">{{col.header}}<p-columnFilter type="text" field={{col.header}} display="menu"></p-columnFilter></th>
+                        <th *ngFor="let col of cols">{{col.header}}<p-columnFilter type="text" field={{col.header}}
+                                display="menu"></p-columnFilter>
+                        </th>
                         <th></th>
                     </tr>
 
-                    <!-- Filitro -->
-                    <!-- <tr>
+                    <!-- Filitro
+                    <tr>
                         <th *ngFor="let col of cols"><p-columnFilter type="text" field={{col.header}} display="menu"></p-columnFilter></th>
                         <th></th>
                     </tr> -->
+
                 </ng-template>
 
                 <!-- Cuerpo -->
-                <ng-template pTemplate="body" let-product >
+                <ng-template pTemplate="body" let-product>
                     <tr>
                         <td *ngFor="let col of cols">{{product[col.field]}}</td>
-                        <td><button pButton pRipple type="button" label="JSON" class="p-button-text" (click)="editProduct(product); json(product)"></button></td>
+                        <td><button pButton pRipple type="button" label="JSON" class="p-button-text"
+                                (click)="editProduct(product); json(product)"></button></td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -92,13 +105,14 @@
 
 <!-- ================= Dialogs ================= -->
 <!-- JSON desde la vista general -->
-<p-dialog [visible]="productDialog" [style]="{width: '600px', height: '75%'}"  header="JSON de envio service layer" [modal]="true"  styleClass="p-fluid" [closable]="false" [draggable]="false">
+<p-dialog [visible]="productDialog" [style]="{width: '600px', height: '75%'}" header="JSON de envio service layer"
+    [modal]="true" styleClass="p-fluid" [closable]="false" [draggable]="false">
     <ng-template pTemplate="content">
 
 
         <div class="field">
-            
-             <textarea [autoResize] = "true" rows="35" cols="40" pInputTextarea [(ngModel)]="formato"></textarea>
+
+            <textarea [autoResize]="true" rows="35" cols="40" pInputTextarea [(ngModel)]="formato"></textarea>
         </div>
     </ng-template>
 
@@ -113,8 +127,12 @@
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 
 <!-- Detalle vista por bodegas -->
-<p-dialog header="Detalle minimo" [(visible)]="displayBasic2" [style]="{width: '70vw', height: '75%'}" [baseZIndex]="10000" [draggable]="false">
-    <p-table [value]="countid" responsiveLayout="scroll" responsiveLayout="stack" [paginator]="true" [rows]="5" [style]="{height: '95%'}">
+<p-dialog header="Detalle minimo" [(visible)]="displayBasic2" [style]="{width: '70vw', height: '75%'}"
+    [baseZIndex]="10000" [draggable]="false">
+
+    <!--------->
+    <p-table [value]="countid" responsiveLayout="scroll" responsiveLayout="stack" [paginator]="true" [rows]="5"
+        [style]="{height: '95%'}">
         <ng-template pTemplate="header">
             <tr>
                 <th *ngFor="let col of colsCid">{{col.header}}</th>
@@ -124,11 +142,13 @@
         <ng-template pTemplate="body" let-productid>
             <tr>
                 <td *ngFor="let col of colsCid">{{productid[col.field]}}</td>
-                <td><p-button icon="pi pi-upload" styleClass="p-button-sm"></p-button></td>
+                <td>
+                    <p-button icon="pi pi-upload" styleClass="p-button-sm"></p-button>
+                </td>
             </tr>
         </ng-template>
     </p-table>
-
+    <!--------->
     <ng-template pTemplate="footer">
         <p-button icon="pi pi-check" (click)="displayBasic2=false" label="Yes" class="p-button-text"></p-button>
     </ng-template>

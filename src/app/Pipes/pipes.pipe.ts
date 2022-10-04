@@ -13,3 +13,4 @@ export class PipesPipe implements PipeTransform {
     });
 }
 }
+
