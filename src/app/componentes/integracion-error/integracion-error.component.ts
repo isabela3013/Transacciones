@@ -37,7 +37,6 @@ export class IntegracionErrorComponent implements OnInit {
   displayBasic2: boolean;
   idc: number;
   peopleFilter: any;
-  Filtertable:'';
 
   ListaTransacciones: Trans[];
 
@@ -49,10 +48,6 @@ export class IntegracionErrorComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.api.getAllTrans().subscribe(data => {
       this.table = data.filter(it => it.Error == true)
-      console.log(this.table)
-
-      console.log(data)
-
       this.cols = [
         { field: 'Registro', header: 'Registro' },
         { field: 'FechaInsert', header: 'Inserción' },
@@ -139,6 +134,7 @@ export class IntegracionErrorComponent implements OnInit {
   }
 
   cptura() {
+    console.log(this.seleccionados)
     let bode = this.seleccionados.map(element => {
       return element.PuntoV;
     });

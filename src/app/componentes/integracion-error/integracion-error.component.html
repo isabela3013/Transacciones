@@ -73,8 +73,8 @@
                 <ng-template pTemplate="header">
                     <!-- Títulos -->
                     <tr>
-                        <th *ngFor="let col of cols">{{col.header}}<p-columnFilter type="text" field={{col.header}}
-                                display="menu"></p-columnFilter>
+                        <th *ngFor="let col of cols">{{col.header}}
+                            <p-columnFilter type="text" field={{col.header}} display="menu"></p-columnFilter>
                         </th>
                         <th></th>
                     </tr>
@@ -90,6 +90,7 @@
                 <!-- Cuerpo -->
                 <ng-template pTemplate="body" let-product>
                     <tr>
+                        
                         <td *ngFor="let col of cols">{{product[col.field]}}</td>
                         <td><button pButton pRipple type="button" label="JSON" class="p-button-text"
                                 (click)="editProduct(product); json(product)"></button></td>
