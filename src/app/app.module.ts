@@ -23,6 +23,9 @@ import { HeaderComponent } from './componentes/estilo/header/header.component';
 import { FooterComponent } from './componentes/estilo/footer/footer.component';
 import { ComparacionComponent } from './componentes/comparacion/comparacion.component';
 import { MenubarModule } from 'primeng/menubar';
+import { FiltrotablePipe } from './filtrotable.pipe';
+import { Filtrotable1Pipe } from './filtrotable1.pipe';
+import { FiltroerrorPipe } from './pipes/filtroerror.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { MenubarModule } from 'primeng/menubar';
     IntegracionErrorComponent,
     HeaderComponent,
     FooterComponent,
-    ComparacionComponent
+    ComparacionComponent,
+    FiltrotablePipe,
+    Filtrotable1Pipe,
+    FiltroerrorPipe
   ],
   imports: [
     BrowserModule,

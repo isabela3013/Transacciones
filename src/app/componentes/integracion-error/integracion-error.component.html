@@ -73,8 +73,12 @@
                 <ng-template pTemplate="header">
                     <!-- Títulos -->
                     <tr>
-                        <th *ngFor="let col of cols">{{col.header}}
-                            <p-columnFilter type="text" field={{col.header}} display="menu"></p-columnFilter>
+                        <!-- <th *ngFor="let col of cols">{{col.header}}
+                            <p-columnFilter type="text" field={{col.header}} display="menu"></p-columnFilter> -->
+                            <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+                                {{col.header}}
+                                <p-sortIcon [field]="col.field"></p-sortIcon>
+                                <p-columnFilter type="text" [field]="col.field" display="menu"></p-columnFilter>
                         </th>
                         <th></th>
                     </tr>

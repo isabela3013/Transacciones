@@ -5,9 +5,11 @@
 export const environment = {
   production: false,
 
-  linkApp : 'https://localhost:44376/api/',
-  linkSAP : 'https://192.168.1.9:50000/b1s/v1/'
+  linkApp: 'https://localhost:44376/api/',
+  linkSAP: 'https://192.168.1.9:50000/b1s/v1/'
 };
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file
