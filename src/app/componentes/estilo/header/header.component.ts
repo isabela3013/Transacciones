@@ -19,6 +19,10 @@ export class HeaderComponent implements OnInit {
     this.refreshNavbars();
   }
 
+  ngOnInitI() {
+    this.refreshNavbars();
+  }
+
   public refreshNavbars(){
     this.items = this.navbarService.itemsNavbar;
   }

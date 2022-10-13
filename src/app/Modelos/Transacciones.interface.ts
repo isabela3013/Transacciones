@@ -13,4 +13,5 @@ export interface Trans {
    IdIntegracion : number;
    ObjetoTraslados : string;
    objetoTraslados : string;
+   Integrado : boolean;
 }

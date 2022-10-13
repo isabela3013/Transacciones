@@ -26,7 +26,9 @@ export class ComparacionComponent implements OnInit {
 
   table : Trans[];
   tableAux : Trans[];
+  tableI : Trans[];
   cols : any[];
+  colsI : any[];
   peopleFilter : any;
   selectedProduct1 : Trans;
   productDialog: boolean = false;
@@ -68,6 +70,7 @@ export class ComparacionComponent implements OnInit {
   CardCodeR : string;
   CardNameR : string;
   verificado: boolean;
+  Integrado: boolean;
 
 
   constructor(
@@ -79,11 +82,10 @@ export class ComparacionComponent implements OnInit {
     //Trae todas las transacciones
     this.api.getAllTrans().subscribe(data =>{
       //this.comparacionJson(data)
+
       //Asigna y filtra las transacciones
-      this.table =  data.filter(it => it.Error == false);
-      console.log(this.table)
-      console.log(data)
-      
+      this.table =  data
+
       // Asigna los valores de la tabla
       this.cols = [
         { field: 'Registro', header: 'Registro' },
@@ -95,14 +97,12 @@ export class ComparacionComponent implements OnInit {
         //{ field: 's', header: 'JSON' },
       ];
 
-      this.peopleFilter = {Bodega: 'PV-LCAS', Registro: '163169'};
-      
-      
+      // this.peopleFilter = {Bodega: 'PV-LCAS', Registro: '163169'};
     })
-
 
     // this.asignarObjetos();
   }
+
 
   editProduct(product: Trans) {
     this.product = {...product};
@@ -436,12 +436,13 @@ export class ComparacionComponent implements OnInit {
 
   //#region Excel
 
-  exportExcel() {
+  exportExcelI() {
     import("xlsx").then(xlsx => {
         const worksheet = xlsx.utils.json_to_sheet(this.table);
         const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
         const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
         this.saveAsExcelFile(excelBuffer, "products");
+        console.log(this.saveAsExcelFile)
     });
   }
 

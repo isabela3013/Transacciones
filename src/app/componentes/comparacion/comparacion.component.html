@@ -8,15 +8,15 @@
             <!-- Botones -->
             <ng-template pTemplate="caption" >
                 <div align="right" class="flex align-items-center justify-content-between">
-                    <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2 botones" pTooltip="XLS" tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcelI()" class="p-button-success mr-2 botones" pTooltip="XLS" tooltipPosition="bottom"></button>
                     <button type="button" pButton pRipple icon="pi pi-refresh" (click)="ngOnInit()" class="p-button-info mr-2 botones" pTooltip="Refresh" tooltipPosition="bottom"></button>
                 </div>
             </ng-template>
 
             <!-- Encabezado -->
             <ng-template pTemplate="header">
-                <!-- Títulos -->
 
+                <!-- Títulos -->
                 <tr>
                     <th *ngFor="let col of cols" [pSortableColumn]="col.field">
                         {{col.header}}

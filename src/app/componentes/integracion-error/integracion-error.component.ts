@@ -37,6 +37,7 @@ export class IntegracionErrorComponent implements OnInit {
   displayBasic2: boolean;
   idc: number;
   peopleFilter: any;
+  tableE : Trans[];
 
   ListaTransacciones: Trans[];
 
@@ -47,7 +48,9 @@ export class IntegracionErrorComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.api.getAllTrans().subscribe(data => {
+
       this.table = data.filter(it => it.Error == true)
+
       this.cols = [
         { field: 'Registro', header: 'Registro' },
         { field: 'FechaInsert', header: 'Inserción' },
@@ -55,7 +58,7 @@ export class IntegracionErrorComponent implements OnInit {
         { field: 'Observaciones', header: 'Observaciones' },
         // { field: 'ObjetoIntegracion', header: 'JSON' },
         { field: 'NombreIntegracion', header: 'Integración' },
-        { field: 'Bodega', header: 'Bodega' }
+        { field: 'Bodega', header: 'Bodega' },
       ];
 
       this.peopleFilter = { Bodega: 'PV-LCAS', Registro: '163169' };
@@ -98,10 +101,12 @@ export class IntegracionErrorComponent implements OnInit {
     this.productC = { ...productC };
     this.bodega = productC.Bodega;
     this.id = productC.IdIntegracionID;
+    
 
 
 
     (await this.api.getAllCountid(this.bodega, this.id)).subscribe(dataid => {
+      
       this.countid = dataid.filter(it => it.Error == true);
       console.log(dataid)
       console.log(this.countid)
@@ -134,21 +139,31 @@ export class IntegracionErrorComponent implements OnInit {
   }
 
   cptura() {
+
     console.log(this.seleccionados)
+
     let bode = this.seleccionados.map(element => {
+
+      console.log(this.seleccionados)
+
+      console.log(element.PuntoV)
+
       return element.PuntoV;
+
     });
 
     this.api.getAllCount(bode.toString(), true).subscribe(countt => {
-      console.log(countt)
-      this.count = countt;
-      console.log(this.count)
+
+      this.count =  countt.filter(it => it.Error == true);
 
       this.colsC = [
         { field: 'NombreIntegracion', header: 'Integración' },
         { field: 'IdIntegracion', header: 'Recuento' },
         { field: 'Bodega', header: 'Bodega' }
       ];
+
+      this.peopleFilter = {Bodega: 'PV-LCAS', Registro: '163169'};
+
     })
   }
 
