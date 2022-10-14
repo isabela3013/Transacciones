@@ -96,6 +96,7 @@ export class ComparacionComponent implements OnInit {
         { field: 'Bodega', header: 'Bodega' },
         //{ field: 's', header: 'JSON' },
       ];
+      this.ngOnInite();
 
       // this.peopleFilter = {Bodega: 'PV-LCAS', Registro: '163169'};
     })
@@ -436,9 +437,36 @@ export class ComparacionComponent implements OnInit {
 
   //#region Excel
 
+  ngOnInite(): void {
+    
+    //Trae todas las transacciones
+    this.api.getAllTrans().subscribe(data =>{
+      //this.comparacionJson(data)
+
+      //Asigna y filtra las transacciones
+      this.tableI = data.filter(it => it.Integrado == false)
+      console.log(this.tableI);
+      // Asigna los valores de la tabla
+      this.colsI = [
+        { field: 'Registro', header: 'Registro' },
+        { field: 'FechaInsert', header: 'Inserción' },
+        { field: 'FechaModificacion', header: 'Modificación' },
+        // { field: 'ObjetoIntegracion', header: 'JSON' },
+        { field: 'NombreIntegracion', header: 'Integración' },
+        { field: 'Bodega', header: 'Bodega' },
+        //{ field: 's', header: 'JSON' },
+      ];
+
+      this.peopleFilter = {Bodega: 'PV-LCAS', Registro: '163169'};
+    })
+
+    // this.asignarObjetos();
+  }
+
+
   exportExcelI() {
     import("xlsx").then(xlsx => {
-        const worksheet = xlsx.utils.json_to_sheet(this.table);
+        const worksheet = xlsx.utils.json_to_sheet(this.tableI);
         const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
         const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
         this.saveAsExcelFile(excelBuffer, "products");

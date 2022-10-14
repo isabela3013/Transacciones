@@ -1,6 +1,6 @@
 <h1>Consulta general de transacciones</h1><br>
     <!-- <div class="row"> -->
-
+        
 <div class="col-3 col-md-12" style="width: 100%;">
     <div class="card" style="width: 100%">
         <p-table selectionMode="single" styleClass="p-datatable-gridlines p-datatable-sm" [(selection)]="selectedProduct1" [value]="table" responsiveLayout="stack" [paginator]="true" [rows]="12" >
@@ -9,7 +9,7 @@
             <ng-template pTemplate="caption" >
                 <div align="right" class="flex align-items-center justify-content-between">
                     <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcelI()" class="p-button-success mr-2 botones" pTooltip="XLS" tooltipPosition="bottom"></button>
-                    <button type="button" pButton pRipple icon="pi pi-refresh" (click)="ngOnInit()" class="p-button-info mr-2 botones" pTooltip="Refresh" tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-refresh" (click)="ngOnInite()" class="p-button-info mr-2 botones" pTooltip="Refresh" tooltipPosition="bottom"></button>
                 </div>
             </ng-template>
 
