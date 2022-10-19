@@ -11,8 +11,11 @@ const routes: Routes = [
   // ,
   {
     path: '',
-    redirectTo: '/integracion-error', 
-    pathMatch: 'full'
+    component: IntegracionErrorComponent,
+  },
+  {
+    path: '**',
+    component: IntegracionErrorComponent,
   },
   {
     path: 'integracion-error',
